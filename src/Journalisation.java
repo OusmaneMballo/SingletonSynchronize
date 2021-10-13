@@ -3,6 +3,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Journalisation {
+    private static final Object object = new Object();
     private static Journalisation _instance;
     private String journal; //Chaine de caractères représentant les messages de log.
 
@@ -14,6 +15,10 @@ public class Journalisation {
         if (_instance==null){
             _instance=new Journalisation();
         }
+        synchronized (object) {
+            if (_instance == null) {
+                _instance = new Journalisation();
+            }
         return _instance;
     }
 
